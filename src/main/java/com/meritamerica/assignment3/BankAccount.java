@@ -3,43 +3,64 @@ package com.meritamerica.assignment3;
 import java.sql.Date;
 
 public class BankAccount {
-	protected static double interestRate;  
-	protected static double balance;
-	protected static long accountNumber;
-	protected static Date dateOpened;
+	protected double interestRate;  
+	protected double balance;
+	protected long accountNumber;
+	protected Date dateOpened;
 	
-	
+//--------------------------------BANKACOUNT METHODS----------------------------------------
+//------------------------------------------------------------------------------------------
 	public BankAccount(double balance) {
+		
 		this.balance = balance;
 	}
-	public BankAccount(double balance, double interestRate)
-	{
-		 this.interestRate = interestRate;
-	     this.balance = balance;
+	public BankAccount(double balance, double interestRate){
+		
+		this.interestRate = interestRate;
+	    this.balance = balance;
 	}
-	
-	
-	public BankAccount(long accountNumber, double balance, double interestRate)
-	{
+	public BankAccount(double balance, double interestRate, Date dateOpened) {
+		
+		this.balance = balance;
+		this.interestRate = interestRate;
+		this.dateOpened = dateOpened;
+	}
+	public BankAccount(long accountNumber, double balance, double interestRate){
+		
 		accountNumber = getAccountNumber();
 		this.interestRate = interestRate;
 	    this.balance = balance;
 	}
-	public long getAccountNumber()
-	{
-		return MeritBank.getNextAccountNumber();
-	}
-	double getBalance()
-	{
-		return balance;
-	}
-	double getInterestRate()
-	{
-		return interestRate;
+	public BankAccount(long accountNumber, double balance, double interestRate,
+						Date dateOpened) {
+		
+		accountNumber = getAccountNumber();
+		this.interestRate = interestRate;
+		this.balance = balance;
+		this.dateOpened = dateOpened;
 	}
 	
-	boolean withdraw(double amount)
-	{
+//----------------------------------GETTERS-------------------------------------------------
+//------------------------------------------------------------------------------------------
+	public long getAccountNumber() {
+		return MeritBank.getNextAccountNumber();
+	}
+	
+	double getBalance() {
+		return balance;
+	}
+	double getInterestRate() {
+		return interestRate;
+	}
+	Date getDateOpenedOn() {
+		return dateOpened;
+	}
+	
+
+	
+//----------------------------------BOOLEANS------------------------------------------------
+//------------------------------------------------------------------------------------------	
+	boolean withdraw(double amount) {
 		if (amount > 0) {
 			balance += amount;
 			System.out.println("This is your new balance $" + balance );
@@ -49,8 +70,7 @@ public class BankAccount {
 			return false;
 		}	
 	}
-	boolean deposit(double amount)
-	{
+	boolean deposit(double amount) {
 		if (amount > 0 && amount <= balance) {
 			balance -= amount;
 			System.out.println("This is your new balance $" + balance);
@@ -60,20 +80,17 @@ public class BankAccount {
 			return false;
 		}
 	}
-	double futureValue(int years)
-	{
-
-	double FV = Math.pow((1 + getInterestRate()), years);
-	return FV;
+	
+//----------------------------------FUTURE VALUE--------------------------------------------
+//------------------------------------------------------------------------------------------
+	double futureValue(int years){
+		double FV = Math.pow((1 + getInterestRate()), years);
+		return FV;
 
 	}
-	public BankAccount(long accountNumber, double balance, double interestRate,
-						Date dateOpened) {
-		accountNumber = getAccountNumber();
-		this.interestRate = interestRate;
-	    this.balance = balance;
-	    this.dateOpened = dateOpened;
-	}
+
+//---------------------------TO/FROM STRING-------------------------------------------------
+//------------------------------------------------------------------------------------------
 	public static BankAccount readFromString(String account) {
 		String[] accountInfo = account.split(",");
 		long accountNumber = Long.valueOf(accountInfo[0]);
@@ -85,7 +102,7 @@ public class BankAccount {
 											dateOpened);
 		return bankAccountInfo;
 	}
-	public static String writeToString() {
+	public String writeToString() {
 		String accountInfo = accountNumber + "," + balance + "," + interestRate;
 		return accountInfo;
 		

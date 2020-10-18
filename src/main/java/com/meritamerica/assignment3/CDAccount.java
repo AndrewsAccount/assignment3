@@ -1,29 +1,22 @@
 package com.meritamerica.assignment3;
 
-
 import java.util.Date;
-
-
 
 public class CDAccount extends BankAccount{
 	
-	private int accInt = 1;
+	
 	private CDOffering offering;
-	Date date;
+	Date dateOpened;
 	private long accountNumber;
 		
-	
-	CDAccount(CDOffering offering, double balance) 
-	{
+	public CDAccount(CDOffering offering, double balance, Date dateOpened) {
 			super(balance, offering.getInterestRate());
 			this.offering = offering;
-			this.date = date;
-			
+			this.dateOpened = dateOpened;		
 	}
 
 	public CDOffering getOffering() {
 		return offering;
-	
 	}
 	
 	public double getInterestRate() {
@@ -34,8 +27,8 @@ public class CDAccount extends BankAccount{
 		return offering.getTerm();
 	}
 	
-	public java.util.Date getStartDate(){
-		return date;
+	public Date getDateOpened(){
+		return dateOpened;
 	}
 	
 	public long getAccountNumber() {
@@ -45,4 +38,16 @@ public class CDAccount extends BankAccount{
 	public double futureValue() {
 		return balance*Math.pow(1 + getInterestRate(), getTerm());
 	}
+	public static CDAccount readFromString(String account) {
+		String[] accountInfo = account.split(",");
+		long accountNumber = Long.valueOf(accountInfo[0]);
+		double balance = Double.valueOf(accountInfo[1]);
+		double interestRate = Double.valueOf(accountInfo[2]);
+		Date dateOpened = Date.valueOf(accountInfo[3]);
+		CDAccount cdAccountInfo = new CDAccount(accountNumber, balance,
+											interestRate,
+											dateOpened);
+		return cdAccountInfo;
+	}
+}
 

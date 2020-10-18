@@ -107,7 +107,9 @@ public class MeritBank {
 		FileReader fr = new FileReader(fileName);
 		BufferedReader br = new BufferedReader(fr);
 		NextAccountNumber = Long.valueOf(br.readLine());
+		
 		int numberOfCDOfferings = Integer.valueOf(br.readLine());
+		
 		cdOffering = new CDOffering[numberOfCDOfferings];
 			for(int i = 0; i < numberOfCDOfferings; i++) {
 				cdOffering[i] = CDOffering.readFromString(br.readLine());
@@ -127,10 +129,12 @@ public class MeritBank {
 				}
 				int numberOfCDAccounts = Integer.valueOf(br.readLine());
 				for(int g = 0; g < numberOfCDAccounts; g++) {
-					accountHolders[i].addCDAccount(CDAccount.readFromString(br.readLine()););
+					accountHolders[i].addCDAccount(CDAccount.readFromString(br.readLine()));
 				}
+				br.close();
 			}
 			return true;	
+			
 		}
 		
 		
