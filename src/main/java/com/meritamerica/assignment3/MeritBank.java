@@ -162,7 +162,7 @@ public class MeritBank {
 			bw.newLine();
 			bw.write(accounts[i].getNumberOfCheckingAccounts());
 			for(int j = 0; j < accounts[i].getNumberOfCheckingAccounts(); j++) {
-				bw.write(String.valueOf(accounts[i].getCheckingAccounts()[j].writeToString());	
+				bw.write(String.valueOf(accounts[i].getCheckingAccounts()[j].writeToString()));	
 			}
 			for(int k = 0; k < accounts[i].getNumberOfSavingsAccounts(); k++) {
 				bw.write(String.valueOf(accounts[i].getSavingsAccounts()[k].writeToString()));
