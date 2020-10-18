@@ -106,6 +106,7 @@ public class MeritBank {
 		try {
 		FileReader fr = new FileReader(fileName);
 		BufferedReader br = new BufferedReader(fr);
+		
 		NextAccountNumber = Long.valueOf(br.readLine());
 		
 		int numberOfCDOfferings = Integer.valueOf(br.readLine());
@@ -134,19 +135,18 @@ public class MeritBank {
 				br.close();
 			}
 			return true;	
-			
-		}
-		
-		
-		
+		}	
 		catch(FileNotFoundException ex) {
 			System.out.println("File not found.");
 			return false;
 			}
 	}
 	static boolean writeToFile(String fileName) {
+		
+		try {
 		FileWriter fr = new FileWriter(fileName);
 		BufferedWriter bw = new BufferedWriter(fr);
+		
 		bw.write(String.valueOf(NextAccountNumber));
 		bw.newLine();
 		bw.write(String.valueOf(cdofferings.length));
@@ -161,21 +161,29 @@ public class MeritBank {
 			bw.write(accounts[i].writeToString());
 			bw.newLine();
 			bw.write(accounts[i].getNumberOfCheckingAccounts());
-			for(int j = 0; j > accounts[i].getNumberOfCheckingAccounts(); j++) {
-				bw.write(String.valueOf(accounts[i]).getCheckingAccount()[j].writeToString());
-				
+			for(int j = 0; j < accounts[i].getNumberOfCheckingAccounts(); j++) {
+				bw.write(String.valueOf(accounts[i].getCheckingAccounts()[j].writeToString());	
 			}
+			for(int k = 0; k < accounts[i].getNumberOfSavingsAccounts(); k++) {
+				bw.write(String.valueOf(accounts[i].getSavingsAccounts()[k].writeToString()));
+			}
+			for(int g = 0; g < accounts[i].getNumberOfCDAccounts(); g++) {
+				bw.write(String.valueOf(accounts[i].getCDAccounts()));
+			}
+		}
+		return true;
+		}
+		catch(IOException ex) {
+			return false;
 		}
 		
 	}
 	static AccountHolder[] sortAccountHolders() {
 		Arrays.sort(accounts);
-		return accounts;
-		
+		return accounts;	
 	}
 	static void setNextAccountNumber(long nextAccountNumber) {
 		NextAccountNumber = nextAccountNumber;
-		
 		
 	}
 	

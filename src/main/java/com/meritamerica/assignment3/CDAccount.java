@@ -15,6 +15,11 @@ public class CDAccount extends BankAccount{
 			this.dateOpened = dateOpened;		
 	}
 
+	public CDAccount(long accountNumber, double balance, double interestRate, Date dateOpened2) {
+		// TODO Auto-generated constructor stub
+		super()
+	}
+
 	public CDOffering getOffering() {
 		return offering;
 	}

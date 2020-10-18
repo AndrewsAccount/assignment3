@@ -7,7 +7,8 @@ public class CheckingAccount extends BankAccount{
 		super(startBalance);
 	}
 	
-	public CheckingAccount(long accountNumber, double balance, double interestRate, Date dateOpened) {
+	public CheckingAccount(long accountNumber, double balance, double interestRate, 
+							Date dateOpened) {
 		// TODO Auto-generated constructor stub
 		super(accountNumber, balance, interestRate, dateOpened);
 	}
