@@ -1,14 +1,18 @@
 package com.meritamerica.assignment3;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class BankAccount {
-	protected double interestRate;  
-	protected double balance;
-	protected long accountNumber;
-	protected Date dateOpened;
+	public double interestRate;  
+	public double balance;
+	public long accountNumber;
+	public static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	public Date dateOpened;
+
 	
-//--------------------------------BANKACOUNT METHODS----------------------------------------
+//--------------------------------BANKACCOUNT CONSTRUCTORS----------------------------------------
 //------------------------------------------------------------------------------------------
 	public BankAccount(double balance) {
 		
@@ -40,6 +44,7 @@ public class BankAccount {
 		this.dateOpened = dateOpened;
 	}
 	
+	
 //----------------------------------GETTERS-------------------------------------------------
 //------------------------------------------------------------------------------------------
 	public long getAccountNumber() {
@@ -52,7 +57,7 @@ public class BankAccount {
 	double getInterestRate() {
 		return interestRate;
 	}
-	Date getDateOpenedOn() {
+	Date getOpenedOn() {
 		return dateOpened;
 	}
 	
@@ -61,22 +66,18 @@ public class BankAccount {
 //----------------------------------BOOLEANS------------------------------------------------
 //------------------------------------------------------------------------------------------	
 	boolean withdraw(double amount) {
-		if (amount > 0) {
-			balance += amount;
-			System.out.println("This is your new balance $" + balance );
+		if (amount > 0 && amount <= balance) {
+			balance -= amount;
 			return true;
 		} else {
-			System.out.println("You dont have any money to deposit");
 			return false;
 		}	
 	}
 	boolean deposit(double amount) {
-		if (amount > 0 && amount <= balance) {
-			balance -= amount;
-			System.out.println("This is your new balance $" + balance);
+		if (amount > 0) {
+			balance += amount;
 			return true;
 		} else {
-			System.out.println("You dont have enough money to withdrawl. You have $" + balance + " in your account");
 			return false;
 		}
 	}
@@ -91,19 +92,21 @@ public class BankAccount {
 
 //---------------------------TO/FROM STRING-------------------------------------------------
 //------------------------------------------------------------------------------------------
-	public static BankAccount readFromString(String account) {
+	public static BankAccount readFromString(String account) throws ParseException, NumberFormatException {
 		String[] accountInfo = account.split(",");
-		long accountNumber = Long.valueOf(accountInfo[0]);
-		double balance = Double.valueOf(accountInfo[1]);
-		double interestRate = Double.valueOf(accountInfo[2]);
-		Date dateOpened = Date.valueOf(accountInfo[3]);
+		
+		long accountNumber = Long.parseLong(accountInfo[0]);
+		double balance = Double.parseDouble(accountInfo[1]);
+		double interestRate = Double.parseDouble(accountInfo[2]);
+		Date dateOpened = formatter.parse(accountInfo[3]);
+		
 		BankAccount bankAccountInfo = new BankAccount(accountNumber, balance,
 											interestRate,
 											dateOpened);
 		return bankAccountInfo;
 	}
 	public String writeToString() {
-		String accountInfo = accountNumber + "," + balance + "," + interestRate;
+		String accountInfo = accountNumber + "," + balance + "," + interestRate + "," + dateOpened;
 		return accountInfo;
 		
 	}

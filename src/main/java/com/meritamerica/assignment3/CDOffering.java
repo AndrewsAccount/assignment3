@@ -1,6 +1,6 @@
 package com.meritamerica.assignment3;
 
-
+import java.text.ParseException;
 
 public class CDOffering {
 	
@@ -20,8 +20,13 @@ public class CDOffering {
 		return interestRate;
 	}
 
-	static CDOffering readFromString(String cdOfferingDataString) {
+	static CDOffering readFromString(String cdOfferingDataString) throws ParseException{
 		
+		String[] accountInfo = cdOfferingDataString.split(",");
+		int term = Integer.parseInt(accountInfo[0]);
+		double interestRate = Double.parseDouble(accountInfo[1]);
+		
+		return new CDOffering(term, interestRate);
 	}
 
 	public String writeToString() {
