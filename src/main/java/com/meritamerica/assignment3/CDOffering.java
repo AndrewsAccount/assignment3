@@ -20,13 +20,14 @@ public class CDOffering {
 		return interestRate;
 	}
 
-	static CDOffering readFromString(String cdOfferingDataString) throws ParseException{
+	static CDOffering readFromString(String cdOfferingDataString) {
 		
 		String[] accountInfo = cdOfferingDataString.split(",");
 		int term = Integer.parseInt(accountInfo[0]);
 		double interestRate = Double.parseDouble(accountInfo[1]);
 		
 		return new CDOffering(term, interestRate);
+		
 	}
 
 	public String writeToString() {

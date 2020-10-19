@@ -62,20 +62,32 @@ public class CDAccount extends BankAccount{
 		CDAccount cdAccountInfo;
 		try {
 		ArrayList<String> accountInfo = new ArrayList<>(Arrays.asList(account.split(",")));
+		for(String s: accountInfo) {
+
+		}
 		long accountNumber = Long.parseLong((accountInfo.get(0)));
+		System.out.println("1");
 		double balance = Double.parseDouble(accountInfo.get(1));
+		System.out.println("2");
 		double interestRate = Double.parseDouble(accountInfo.get(2));
-		SimpleDateFormat formatter = new SimpleDateFormat();
-		Date dateOpened = formatter.parse(accountInfo.get(3));
+		System.out.println("3");
+		//SimpleDateFormat formatter = new SimpleDateFormat();
+		//Date dateOpened = formatter.parse(accountInfo.get(3));
+		Date dateOpened = new Date();
+		System.out.println("4");
 		int term = Integer.parseInt(accountInfo.get(4));
+		System.out.println("5");
 		cdAccountInfo = new CDAccount(accountNumber, balance,
 											interestRate,
 											dateOpened, term);
 		return cdAccountInfo;
 		}
-		catch(ParseException ex){
-			throw new java.lang.NumberFormatException();
+		catch(Exception ex){
+			//throw new java.lang.NumberFormatException();
+			System.out.println("Hello.");
+			return null;
 		}
+	
 	
 	}
 	@Override

@@ -100,7 +100,7 @@ public class MeritBank {
 
 	}
 
-	public static boolean readFromFile(String fileName) throws ParseException  {
+	public static boolean readFromFile(String fileName) {
 		ArrayList<String> fileArray = new ArrayList<String>();
 
 		int counter = 0;
@@ -175,13 +175,16 @@ public class MeritBank {
 
 			br.close();
 
-		} catch (NumberFormatException e) {
+		} catch (NumberFormatException e ) {
 			System.out.println("The connection to the file was lost.");
 			return false;
 		} catch (IOException e) {
 			e.getStackTrace();
 			return false;
+		} catch (ParseException e) {
+			
 		}
+		
 
 		return true;
 	}
